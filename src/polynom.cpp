@@ -29,7 +29,7 @@ void TPolynom::addRoot(number root) {
 
 number TPolynom::value (number val) {
     number result = 0;
-    for (int i= 0; i < this->arrCoef->getSize(); i++) {
+    for (unsigned i = 0; i < this->arrCoef->getSize(); i++) {
         int rootPow = (this->arrCoef->getSize() - i - 1);
         result += this->arrCoef->get(i) * pow(val, rootPow);
     }
@@ -45,8 +45,8 @@ ostream& operator<<(ostream& os, TPolynom& polynom) {
         return os;
     }
 
-    if (polynom.printMode == EPrintMode::EPrintModeClassic) {
-        for (int i = 0; i < polynom.arrCoef->getSize() - 1; i++) {
+    if (polynom.printMode == EPrintMode::EPrintModeCanonical) {
+        for (unsigned i = 0; i < polynom.arrCoef->getSize() - 1; i++) {
             int pow = (polynom.arrCoef->getSize() - i - 1);
             os << polynom.arrCoef->get(i);
             if (pow != 0) os << "x";
@@ -56,16 +56,22 @@ ostream& operator<<(ostream& os, TPolynom& polynom) {
         cout << polynom.arrCoef->get(polynom.arrCoef->getSize() - 1);
 
     } else { // TODO: podumat'
-        if (polynom.arrCoef->getSize() == 1) cout << polynom.arrCoef->get(0);
-        else cout << "x";
+//        if (polynom.arrCoef->getSize() == 1) cout << polynom.arrCoef->get(0);
+//        else cout << "x";
 
-        for (int i = 1; i < polynom.arrCoef->getSize(); i++) {
-            os << " + ";
-            int pow = (polynom.arrCoef->getSize() - i - 1);
-            os << (polynom.arrCoef->get(i) / polynom.arrCoef->get(0));
-            if (pow != 0) os << "x";
-            if (pow > 1) os << "^" << pow;
+//        for (int i = 1; i < polynom.arrCoef->getSize(); i++) {
+//            os << " + ";
+//            int pow = (polynom.arrCoef->getSize() - i - 1);
+//            os << (polynom.arrCoef->get(i) / polynom.arrCoef->get(0));
+//            if (pow != 0) os << "x";
+//            if (pow > 1) os << "^" << pow;
+//        }
+        cout << polynom.canonicCoef;
+        for (unsigned i = 0; i < polynom.arrRoot->getSize(); ++i)
+        {
+          cout << "(x - "  << polynom.arrRoot->get(i) << ")";
         }
+
     }
 
     os << "\n";

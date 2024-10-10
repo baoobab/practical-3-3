@@ -23,7 +23,7 @@ int TApplication::exec() {
 
         switch (ch) {
         case 5: {
-            polynom.setPrintMode(EPrintMode::EPrintModeClanonic);
+            polynom.setPrintMode(EPrintMode::EPrintModeCanonical);
             cout << polynom << "\n";
             break;
         }
@@ -47,7 +47,7 @@ int TApplication::exec() {
             polynom.flushMemory();
             // cout << "Vibor tipa vvoda";
 
-            cout << "Enter canonic coef: ";
+            cout << "Enter a_n (canonic coef): ";
             cin >> canonicCoef;
             cin.clear();
             cin.sync();
@@ -102,11 +102,11 @@ int TApplication::menu() {
     int ch;
 
     cout << "\nOperations:" << "\n";
-    cout << "5 - print (canonical)" << "\n";
-    cout << "4 - print (classic)" << "\n";
+    cout << "5 - print polynom (canonical)" << "\n";
+    cout << "4 - print polynom (classic)" << "\n";
     cout << "3 - roots" << "\n";
-    cout << "2 - value" << "\n";
-    cout << "1 - coef" << "\n";
+    cout << "2 - calculate value of polynom in point x" << "\n";
+    cout << "1 - set polynom by a_n and x_n, x_(n-1), ... , x_0" << "\n";
     cout << "0 - exit" << "\n" << "> ";
 
     cin >> ch;

@@ -6,7 +6,7 @@
 
 enum EPrintMode {
     EPrintModeClassic,
-    EPrintModeClanonic
+    EPrintModeCanonical
 };
 
 class TPolynom {
