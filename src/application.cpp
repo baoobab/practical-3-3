@@ -23,12 +23,12 @@ int TApplication::exec() {
 
         switch (ch) {
         case 5: {
+            polynom.calcCoefFromRoots();
             polynom.setPrintMode(EPrintMode::EPrintModeCanonical);
             cout << polynom << "\n";
             break;
         }
         case 4: {
-            polynom.calcCoefFromRoots();
             polynom.setPrintMode(EPrintMode::EPrintModeClassic);
             cout << polynom << "\n";
             break;
@@ -44,11 +44,10 @@ int TApplication::exec() {
         case 1: {
             number canonicCoef = 1;
 
-            polynom.flushMemory();
-            // cout << "Vibor tipa vvoda";
-
             cout << "Enter a_n (canonic coef): ";
             cin >> canonicCoef;
+            polynom.flushMemory();
+            polynom.setCanonicCoef(canonicCoef);
             cin.clear();
             cin.sync();
 
@@ -67,22 +66,6 @@ int TApplication::exec() {
                     polynom.addRoot(item);
                 }
             }
-
-
-            // while (true) {
-            //     if (!(cin >> item)) {
-            //         cin.clear();
-            //         string stopSeq;
-            //         cin >> stopSeq;
-            //         if (stopSeq.length() < 2 || stopSeq[0] != stopSeq[1]) {
-            //             break;
-            //         } else {
-            //             cout << "Invalid input. Enter complex numbers or a non-numeric sequence to stop: ";
-            //         }
-            //     } else {
-            //         polynom.addCoef(item);
-            //     }
-            // }
             break;
         }
         case 0: {

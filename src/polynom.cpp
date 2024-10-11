@@ -40,7 +40,7 @@ number TPolynom::value (number val) {
 ostream& operator<<(ostream& os, TPolynom& polynom) {
     cout << "P(x) = ";
 
-    if (!polynom.arrCoef->getSize()) {
+    if (!polynom.arrRoot->getSize()) {
         cout << "0";
         return os;
     }
@@ -55,17 +55,7 @@ ostream& operator<<(ostream& os, TPolynom& polynom) {
         }
         cout << polynom.arrCoef->get(polynom.arrCoef->getSize() - 1);
 
-    } else { // TODO: podumat'
-//        if (polynom.arrCoef->getSize() == 1) cout << polynom.arrCoef->get(0);
-//        else cout << "x";
-
-//        for (int i = 1; i < polynom.arrCoef->getSize(); i++) {
-//            os << " + ";
-//            int pow = (polynom.arrCoef->getSize() - i - 1);
-//            os << (polynom.arrCoef->get(i) / polynom.arrCoef->get(0));
-//            if (pow != 0) os << "x";
-//            if (pow > 1) os << "^" << pow;
-//        }
+    } else {
         cout << polynom.canonicCoef;
         for (unsigned i = 0; i < polynom.arrRoot->getSize(); ++i)
         {
@@ -93,30 +83,33 @@ void TPolynom::setCanonicCoef(number coef) {
 }
 
 void TPolynom::calcCoefFromRoots() {
-    if (!arrRoot) return;
+    TArray classicalCoeffs; // Начинаем с единичного полинома
+    classicalCoeffs.appendElement(1); // Начальный коэффициент для x^0
 
-    // Начинаем с канонического коэффициента
-    canonicCoef = 1;
+    for (unsigned i = 0; i < this->arrRoot->getSize(); i++) {
+        TArray newCoeffs;
+        newCoeffs.fillArray(classicalCoeffs.getSize() + 1);
 
-    // Начальные коэффициенты многочлена (1 для x^0)
-    TArray* coefficients = new TArray();
-    coefficients->fillArray(arrRoot->getSize() + 1);
-    coefficients->replaceElement(0, 1);
-
-    // Умножаем на каждый линейный множитель
-    for (int i = 0; i < arrRoot->getSize(); i++) {
-        number currentRoot = -arrRoot->get(i); // (x - r) => x + (-r)
-        for (int j = i + 1; j > 0; j--) { // Обновляем коэффициенты в обратном порядке
-            (*coefficients)[j] += (*coefficients)[j - 1] * currentRoot;
+        for (unsigned j = 0; j < classicalCoeffs.getSize(); j++) {
+            newCoeffs.replaceElement(j, newCoeffs.get(j) + classicalCoeffs.get(j)); // Сохраняем старые коэффициенты
+            newCoeffs.replaceElement(j + 1, newCoeffs.get(j + 1) + (-this->arrRoot->get(i) * classicalCoeffs.get(j)) ); // Умножаем на (x - root)
         }
-        (*coefficients)[0] = (*coefficients)[0] * currentRoot; // Умножаем на (-r)
+
+        classicalCoeffs.fillArray(newCoeffs.getSize());
+        for (unsigned t = 0; t < newCoeffs.getSize(); t++) { // Обновляем коэффициенты
+            classicalCoeffs.replaceElement(t, newCoeffs.get(t));
+        }
     }
 
-    // Очищаем предыдущие данные и добавляем новые коэффициенты в массив arrCoef
-    arrCoef->flushMemory();
-    for (int i = 0; i <= arrRoot->getSize(); i++) {
-        addCoef(coefficients->get(i));
+    // Умножаем на канонический коэффициент
+    for (int i = 0; i < classicalCoeffs.getSize(); i++) {
+        classicalCoeffs.replaceElement(i, classicalCoeffs.get(i) * this->canonicCoef);
     }
 
-    coefficients->flushMemory(); // Освобождаем память
+    // Сохраняем классические коэффициенты
+    this->arrCoef->flushMemory();
+    for (int i = 0; i < classicalCoeffs.getSize(); i++) {
+        this->arrCoef->appendElement(classicalCoeffs.get(i));
+    }
+
 }

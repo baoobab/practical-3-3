@@ -12,7 +12,6 @@ TArray::TArray() {
 }
 
 TArray::~TArray() {
-    cout << "\narrdestr\n";
     this->flushMemory();
 }
 
