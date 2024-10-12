@@ -113,3 +113,18 @@ void TPolynom::calcCoefFromRoots() {
     }
 
 }
+
+void TPolynom::changeRootByIndex(unsigned index, number newRoot)
+{
+    arrRoot->replaceElement(index, newRoot);
+}
+
+void TPolynom::printRoots()
+{
+    arrRoot->print();
+}
+
+number TPolynom::getCanonicCoef()
+{
+    return canonicCoef;
+}

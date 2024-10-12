@@ -34,7 +34,20 @@ int TApplication::exec() {
             break;
         }
         case 3: {
-            // TODO: ввод а_н и корней по индексу
+            cout << "Current a_n = " << polynom.getCanonicCoef() << "\n";
+            cout << "Enter new a_n: ";
+            number newCanonicalCoef;
+            cin >> newCanonicalCoef;
+            cout << "Current roots ";
+            polynom.printRoots();
+            cout << "Enter index of root you want to change: ";
+            unsigned index;
+            cin >> index;
+            cout << "Enter new root: ";
+            number newRoot;
+            cin >> newRoot;
+            polynom.changeRootByIndex(index, newRoot);
+            polynom.calcCoefFromRoots();
             break;
         }
         case 2: {
@@ -44,7 +57,7 @@ int TApplication::exec() {
             break;
         }
         case 1: {
-            number canonicCoef = 1;
+            number canonicCoef;
 
             cout << "Enter a_n (canonic coef): ";
             cin >> canonicCoef;
@@ -90,9 +103,9 @@ int TApplication::menu() {
     cout << "\nOperations:" << "\n";
     cout << "5 - print polynom (canonical)" << "\n";
     cout << "4 - print polynom (classic)" << "\n";
-    cout << "3 - roots" << "\n";
+    cout << "3 - set new a_n and root" << "\n";
     cout << "2 - calculate value of polynom in point x" << "\n";
-    cout << "1 - set polynom by a_n and x_n, x_(n-1), ... , x_0" << "\n";
+    cout << "1 - set polynom by a_n and x_n, x_(n-1), ... , x_1" << "\n";
     cout << "0 - exit" << "\n" << "> ";
 
     cin >> ch;

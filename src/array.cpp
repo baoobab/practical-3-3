@@ -203,7 +203,7 @@ number& TArray::operator[](unsigned index) {
         throw out_of_range("out");
     }
 
-    return *(this->arr + index);
+    return *(this->arr+index);
 }
 
 number TArray::get(unsigned index) {

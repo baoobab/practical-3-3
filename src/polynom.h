@@ -27,6 +27,10 @@ public:
     number value(number val);
     friend ostream& operator<<(ostream&, TPolynom&);
     void calcCoefFromRoots();
+
+    void changeRootByIndex(unsigned index, number newRoot);
+    void printRoots();
+    number getCanonicCoef();
 };
 
 #endif // POLYNOM_H
