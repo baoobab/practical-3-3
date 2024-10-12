@@ -23,7 +23,7 @@ int TApplication::exec() {
 
         switch (ch) {
         case 5: {
-            polynom.calcCoefFromRoots();
+//            polynom.calcCoefFromRoots(); // это делаем в case 1 чтобы все работало
             polynom.setPrintMode(EPrintMode::EPrintModeCanonical);
             cout << polynom << "\n";
             break;
@@ -34,11 +34,13 @@ int TApplication::exec() {
             break;
         }
         case 3: {
+            // TODO: ввод а_н и корней по индексу
             break;
         }
         case 2: {
+            cout << "Enter point x to calculate P(x):\nx = ";
             cin >> item;
-            cout << "P(" << item << "): " << polynom.value(item) << "\n";
+            cout << "P" << item << " = " << polynom.value(item) << "\n";
             break;
         }
         case 1: {
@@ -66,6 +68,7 @@ int TApplication::exec() {
                     polynom.addRoot(item);
                 }
             }
+            polynom.calcCoefFromRoots();
             break;
         }
         case 0: {
