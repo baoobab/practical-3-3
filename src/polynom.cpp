@@ -41,7 +41,7 @@ ostream& operator<<(ostream& os, TPolynom& polynom) {
     cout << "P(x) = ";
 
     if (!polynom.arrRoot->getSize()) {
-        cout << "0";
+        cout << polynom.canonicCoef;
         return os;
     }
 

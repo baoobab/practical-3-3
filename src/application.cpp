@@ -38,15 +38,21 @@ int TApplication::exec() {
             cout << "Enter new a_n: ";
             number newCanonicalCoef;
             cin >> newCanonicalCoef;
-            cout << "Current roots ";
+            if (!cin.good()) {
+                cout << "\nYou entered an incorrect value\n";
+                break;
+            }
+            polynom.setCanonicCoef(newCanonicalCoef);
+            cout << "Current roots: ";
             polynom.printRoots();
-            cout << "Enter index of root you want to change: ";
+            cout << "Enter index of root you want to change (or enter any char - to save ONLY new a_n): ";
             unsigned index;
             cin >> index;
-            cout << "Enter new root: ";
-            number newRoot;
-            cin >> newRoot;
-            polynom.changeRootByIndex(index, newRoot);
+            if (cin.good()) {
+                cout << "Enter new root: ";
+                cin >> item;
+                polynom.changeRootByIndex(index, item);
+            }
             polynom.calcCoefFromRoots();
             break;
         }
