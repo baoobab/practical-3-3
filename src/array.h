@@ -28,16 +28,7 @@ public:
     void replaceElement(unsigned int index, number value);
     void removeElementByIndex(unsigned int index);
     void fillArray(unsigned newSize, number el = 0);
-
-
-    // TODO: добавить
-    // TODO: добавить
-    // TODO: добавить    // TODO: добавить
-    // TODO: добавить    // TODO: добавитьм
-    // TODO: добавить    // TODO: добавить    // TODO: добавить
-    // TODO: добавить
     number get(unsigned idx);
-    number& operator[](unsigned index);
 };
 
 #endif // ARRAY_H

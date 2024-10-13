@@ -197,15 +197,6 @@ void TArray::resizeArray(unsigned int newSize) {
     return;
 }
 
-
-number& TArray::operator[](unsigned index) {
-    if (!checkIndex(index)) {
-        throw out_of_range("out");
-    }
-
-    return *(this->arr+index);
-}
-
 number TArray::get(unsigned index) {
     if (!checkIndex(index)) {
         throw out_of_range("out"); // TODO: podumat'
