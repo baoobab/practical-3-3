@@ -22,15 +22,43 @@ int TApplication::exec() {
         ch = menu();
 
         switch (ch) {
-        case 5: {
+        case 6: {
 //            polynom.calcCoefFromRoots(); // это делаем в case 1 чтобы все работало
             polynom.setPrintMode(EPrintMode::EPrintModeCanonical);
             cout << polynom << "\n";
             break;
         }
-        case 4: {
+        case 5: {
             polynom.setPrintMode(EPrintMode::EPrintModeClassic);
             cout << polynom << "\n";
+            break;
+        }
+        case 4: {
+            unsigned size;
+
+            cout << "Current roots: ";
+            polynom.printRoots();
+
+            cout << "\nEnter a new size of roots array: ";
+            cin >> size;
+            if (!cin.good()) {
+                cout << "\nYou entered an incorrect value\n";
+                break;
+            }
+            int addedCount = polynom.changeArrRootSize(size);
+
+            if (addedCount > 0) {
+                for (int i = size - addedCount; i < size; i++) {
+                    cout << "Enter root[" << i << "]: ";
+                    cin >> item;
+                    polynom.changeRootByIndex(i, item);
+                    cout << "\n";
+                }
+            }
+            polynom.calcCoefFromRoots();
+
+            cout << "Updated roots: ";
+            polynom.printRoots();
             break;
         }
         case 3: {
@@ -107,8 +135,9 @@ int TApplication::menu() {
     int ch;
 
     cout << "\nOperations:" << "\n";
-    cout << "5 - print polynom (canonical)" << "\n";
-    cout << "4 - print polynom (classic)" << "\n";
+    cout << "6 - print polynom (canonical)" << "\n";
+    cout << "5 - print polynom (classic)" << "\n";
+    cout << "4 - change size of roots array" << "\n";
     cout << "3 - set new a_n and root" << "\n";
     cout << "2 - calculate value of polynom in point x" << "\n";
     cout << "1 - set polynom by a_n and x_n, x_(n-1), ... , x_1" << "\n";

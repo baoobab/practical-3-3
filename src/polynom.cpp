@@ -114,6 +114,15 @@ void TPolynom::calcCoefFromRoots() {
 
 }
 
+int TPolynom::changeArrRootSize(unsigned newSize) {
+    int addedCount = newSize - this->arrRoot->getSize();
+
+    this->arrRoot->resizeArray(newSize);
+    this->calcCoefFromRoots();
+
+    return addedCount;
+}
+
 void TPolynom::changeRootByIndex(unsigned index, number newRoot)
 {
     arrRoot->replaceElement(index, newRoot);

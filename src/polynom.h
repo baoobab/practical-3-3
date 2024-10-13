@@ -27,7 +27,7 @@ public:
     number value(number val);
     friend ostream& operator<<(ostream&, TPolynom&);
     void calcCoefFromRoots();
-
+    int changeArrRootSize(unsigned newSize); // Возврщает int - кол-во добавленных эл-тов
     void changeRootByIndex(unsigned index, number newRoot);
     void printRoots();
     number getCanonicCoef();
